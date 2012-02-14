@@ -1,0 +1,22 @@
+--- functions.php.orig	2012-02-14 01:13:16.000000000 -0800
++++ functions.php	2012-02-14 01:11:49.000000000 -0800
+@@ -2676,6 +2676,8 @@
+ {
+ 	global $template;
+ 
++	define('META_REDIR_TARGET', $url);
++
+ 	$url = redirect($url, true, $disable_cd_check);
+ 	$url = str_replace('&', '&amp;', $url);
+ 
+@@ -3916,6 +3918,10 @@
+ 		case E_USER_WARNING:
+ 		case E_USER_NOTICE:
+ 
++			if (defined('META_REDIR_TARGET')){
++				redirect(META_REDIR_TARGET);
++			}
++
+ 			define('IN_ERROR_HANDLER', true);
+ 
+ 			if (empty($user->data))
